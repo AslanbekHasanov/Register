@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Register.Backend.DataLayer;
+using Register.Backend.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddScoped<IService, Service>();
 
 builder.Services.AddDbContext<RegistrDbContext>(option => 
 option.UseNpgsql(builder.Configuration.GetConnectionString("RegistrConnectionString")));
