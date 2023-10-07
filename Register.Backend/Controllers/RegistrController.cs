@@ -36,7 +36,7 @@ namespace Register.Backend.Controllers
                 return NotFound();
 
             }
-            return Ok();
+            return Ok(res);
         }
         [HttpGet]
         public async Task<IActionResult> GetAllData()
@@ -48,6 +48,32 @@ namespace Register.Backend.Controllers
 
             }
             return Ok(res);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var res = await _service.GetByIDAsync(id);
+            if (res == null)
+            {
+                return NotFound();
+
+            }
+            return Ok(res);
+        }
+        [HttpDelete]
+        public async Task<IActionResult> ISDelete(int id)
+        {
+            bool res = await _service.RemoveUserAsync(id);
+            if (res == false)
+            {
+
+                return NotFound();
+
+
+            }
+            return Ok(res);
+
+
         }
 
     }

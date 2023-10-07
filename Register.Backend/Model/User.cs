@@ -7,7 +7,7 @@ namespace Register.Backend.Model
     public class User
     {
         [Identity]
-        public  Id { get; set; }
+        public int Id { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]

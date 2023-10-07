@@ -29,6 +29,16 @@ namespace Register.Backend.Repository
             return result;
         }
 
+        public async Task<User> GetByIDAsync(int id)
+        {
+            var res = await _registr.Users.FirstOrDefaultAsync(p => p.Id == id);
+            if (res == null) 
+            {
+                return res;
+            }
+            return res;
+        }
+
         public async Task<bool> LogIn(string email, string password)
         {
             var res = await _registr.Users.FirstOrDefaultAsync(p => p.EmailAddress == email && p.Password == password);
@@ -38,6 +48,18 @@ namespace Register.Backend.Repository
             }
             return true;
 
+        }
+
+        public async Task<bool> RemoveUserAsync(int id)
+        {
+            var res = await _registr.Users.FirstOrDefaultAsync(p => p.Id == id);
+            if (res == null)
+            {
+                return false;            
+            }
+            _registr.Users.Remove(res);
+            _registr.SaveChanges();
+            return true;
         }
 
         public async Task<bool> SignUpAsync(User user)
