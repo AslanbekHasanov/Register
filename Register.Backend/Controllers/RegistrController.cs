@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Register.Backend.Model;
 using Register.Backend.Repository;
-using RouteAttribute = Microsoft.AspNetCore.Components.RouteAttribute;
 
 namespace Register.Backend.Controllers
 {
@@ -10,9 +9,9 @@ namespace Register.Backend.Controllers
     [Route("api/[controller]/[action]")]
     public class RegistrController : ControllerBase
     {
-        private readonly Service _service;
+        private readonly IService _service;
 
-        public RegistrController(Service service)
+        public RegistrController(IService service)
         {
             _service = service;
         }
@@ -39,7 +38,17 @@ namespace Register.Backend.Controllers
             }
             return Ok();
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAllData()
+        {
+            var res = await _service.GetAllUsersAsync();
+            if (res == null)
+            {
+                return NoContent();
 
+            }
+            return Ok(res);
+        }
 
     }
 }

@@ -1,6 +1,8 @@
 ﻿using LinqToDB;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Register.Backend.DataLayer;
 using Register.Backend.Model;
 
@@ -13,6 +15,18 @@ namespace Register.Backend.Repository
         public Service(RegistrDbContext registr)
         {
             _registr = registr;
+        }
+
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        {
+
+            var result = await _registr.Users.ToListAsync();
+            if (result == null)
+            {
+                return result;
+
+            }
+            return result;
         }
 
         public async Task<bool> LogIn(string email, string password)
