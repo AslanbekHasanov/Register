@@ -6,6 +6,7 @@ namespace Register.Backend.Model
 {
     public class User
     {
+        //bu int tipiga taluqli id
         [Identity]
         public int Id { get; set; }
         [Required]

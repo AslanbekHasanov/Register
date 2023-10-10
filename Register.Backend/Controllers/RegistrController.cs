@@ -15,7 +15,7 @@ namespace Register.Backend.Controllers
         {
             _service = service;
         }
-
+        //Bu ruyhatdan utish uchun yozilgan code
         [HttpPost]
         public async Task<IActionResult> SignUp([FromForm]User user)
         {
